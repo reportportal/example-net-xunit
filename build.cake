@@ -1,4 +1,4 @@
-#tool nuget:?package=xunit.runner.console
+#tool "xunit.runner.console"
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
 //////////////////////////////////////////////////////////////////////
@@ -54,18 +54,20 @@ Task("Connect-ReportPortal")
 	.IsDependentOn("Build")
 	.Does(() =>
 {
-	//System.IO.File.WriteAllText("tools/NUnit.ConsoleRunner/tools/ReportPortal.addins", "../../../src/Example/bin/" + configuration + "/ReportPortal.NUnitExtension.dll\r\n../../../src/Example/bin/" + configuration + "/Example.dll");
+	DirectoryPath exePath = Context.Tools.Resolve("xunit.console.exe").GetDirectory();
+	Console.WriteLine(exePath);
 });
 
 Task("Run-Unit-Tests")
 	.IsDependentOn("Connect-ReportPortal")
+	.ContinueOnError()
 	.Does(() =>
 {
-	try
-	{
-		XUnit("./src/**/bin/" + configuration + "/Example.dll", new XUnitSettings { ToolPath = "./tools/xunit.runner.console/tools/xunit.console.exe" });
-	}
-	catch(Exception exp) {}
+	XUnit2("./**/bin/" + configuration + "/Example.dll", new XUnit2Settings {
+		Parallelism = ParallelismOption.All,
+        HtmlReport = true,
+        OutputDirectory = "."
+    });
 });
 
 //////////////////////////////////////////////////////////////////////
