@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
@@ -23,6 +24,9 @@ namespace Example.XUnit.Tests
         [Trait("Category", "My Category 2")]
         public void Test1()
         {
+            var a =  Assembly.GetExecutingAssembly();
+            _out.WriteLine(a.Location);
+
             Console.WriteLine("Output from Class1.Test1");
             _out.WriteLine("Realtime Output from Class1.Test1");
             _out.WriteLine("One more realtime output from Class1.Test1");

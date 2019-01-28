@@ -1,4 +1,5 @@
-#tool "xunit.runner.console"
+#tool "nuget:?package=xunit.runner.console&version=2.4.1"
+#addin Cake.Curl
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
 //////////////////////////////////////////////////////////////////////
@@ -54,7 +55,13 @@ Task("Connect-ReportPortal")
 	.IsDependentOn("Build")
 	.Does(() =>
 {
+	CurlDownloadFile(new Uri("https://github.com/reportportal/agent-net-xunit/releases/download/1.1.0/reportportal-1.1.0-net452.zip"), new CurlDownloadSettings{FollowRedirects = true});
+
 	DirectoryPath exePath = Context.Tools.Resolve("xunit.console.exe").GetDirectory();
+
+	DeleteFiles(exePath + "/ReportPortal*");
+	Unzip("reportportal-1.1.0-net452.zip", exePath);
+
 	Console.WriteLine(exePath);
 });
 
@@ -63,11 +70,7 @@ Task("Run-Unit-Tests")
 	.ContinueOnError()
 	.Does(() =>
 {
-	XUnit2("./**/bin/" + configuration + "/Example.dll", new XUnit2Settings {
-		Parallelism = ParallelismOption.All,
-        HtmlReport = true,
-        OutputDirectory = "."
-    });
+	XUnit2("./src/Example/bin/" + configuration + "/net452/Example.dll");
 });
 
 //////////////////////////////////////////////////////////////////////
