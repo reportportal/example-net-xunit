@@ -70,7 +70,7 @@ Task("Run-Unit-Tests")
 	.ContinueOnError()
 	.Does(() =>
 {
-	XUnit2("./src/Example/bin/" + configuration + "/net452/Example.dll");
+	XUnit2("./src/Example/bin/" + configuration + "/net452/Example.dll", new XUnit2Settings {ArgumentCustomization = args=>args.Append("-reportportal")});
 });
 
 //////////////////////////////////////////////////////////////////////
