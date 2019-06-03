@@ -55,12 +55,12 @@ Task("Connect-ReportPortal")
 	.IsDependentOn("Build")
 	.Does(() =>
 {
-	CurlDownloadFile(new Uri("https://github.com/reportportal/agent-net-xunit/releases/download/1.1.0/reportportal-1.1.0-net452.zip"), new CurlDownloadSettings{FollowRedirects = true});
+	CurlDownloadFile(new Uri("https://github.com/reportportal/agent-net-xunit/releases/download/1.1.1/reportportal-1.1.1-net452.zip"), new CurlDownloadSettings{FollowRedirects = true});
 
 	DirectoryPath exePath = Context.Tools.Resolve("xunit.console.exe").GetDirectory();
 
 	DeleteFiles(exePath + "/ReportPortal*");
-	Unzip("reportportal-1.1.0-net452.zip", exePath);
+	Unzip("reportportal-1.1.1-net452.zip", exePath);
 
 	Console.WriteLine(exePath);
 });
