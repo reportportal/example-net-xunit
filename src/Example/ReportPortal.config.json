@@ -13,6 +13,5 @@
     "description": "this is description",
     "debugMode": true,
     "tags": [ "t1", "t2" ]
-  },
-  "rootNamespaces": [ "Example", "Tests" ]
+  }
 }
