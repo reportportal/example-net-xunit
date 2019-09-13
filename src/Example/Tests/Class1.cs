@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReportPortal.Shared;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -16,7 +17,7 @@ namespace Example.XUnit.Tests
 
         public Class1(ITestOutputHelper output)
         {
-            _out = output;
+            _out = output.WithReportPortal();
         }
 
         [Fact]
@@ -24,9 +25,16 @@ namespace Example.XUnit.Tests
         [Trait("Category", "My Category 2")]
         public void Test1()
         {
+            System.Threading.Thread.Sleep(10000);
+
             Console.WriteLine("Console Output from Class1.Test1");
             _out.WriteLine("Realtime Output from Class1.Test1");
             _out.WriteLine("One more realtime output from Class1.Test1");
+
+            for (int i = 0; i < 10; i++)
+            {
+                Log.Debug($"From Class1.Test1 log #{i}");
+            }
         }
 
         [Fact]

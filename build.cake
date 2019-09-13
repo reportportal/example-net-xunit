@@ -31,7 +31,7 @@ Task("Restore-NuGet-Packages")
 	.IsDependentOn("Clean")
 	.Does(() =>
 {
-	NuGetRestore("./src/Example.sln");
+	NuGetRestore("./Example.sln");
 });
 
 Task("Build")
@@ -41,12 +41,12 @@ Task("Build")
 	if(IsRunningOnWindows())
 	{
 	  // Use MSBuild
-	  MSBuild("./src/Example.sln", new MSBuildSettings().SetConfiguration(configuration));
+	  MSBuild("./Example.sln", new MSBuildSettings().SetConfiguration(configuration));
 	}
 	else
 	{
 	  // Use XBuild
-	  XBuild("./src/Example.sln", settings =>
+	  XBuild("./Example.sln", settings =>
 		settings.SetConfiguration(configuration));
 	}
 });
