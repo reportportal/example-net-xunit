@@ -25,21 +25,32 @@ namespace Example.XUnit.Tests
         [Trait("Category", "My Category 2")]
         public void Test1()
         {
-            System.Threading.Thread.Sleep(10000);
-
-            Console.WriteLine("Console Output from Class1.Test1");
-            _out.WriteLine("Realtime Output from Class1.Test1");
-            _out.WriteLine("One more realtime output from Class1.Test1");
-
-            for (int i = 0; i < 10; i++)
+            using (var scope = Log.BeginNewScope("qwe"))
             {
-                Log.Debug($"From Class1.Test1 log #{i}");
+                Console.WriteLine("Console Output from Class1.Test1");
+                _out.WriteLine("Realtime Output from Class1.Test1");
+                _out.WriteLine("One more realtime output from Class1.Test1");
+
+                for (int i = 0; i < 10; i++)
+                {
+                    Log.Debug($"From Class1.Test1 log #{i}");
+                }
             }
         }
 
         [Fact]
         public void Test2()
         {
+            using (var scope = Log.BeginNewScope("abc"))
+            {
+                scope.Info("abc - in scope");
+
+                using (var scope2 = Log.BeginNewScope("qwe"))
+                {
+                    scope2.Trace("qwe - in scope2");
+                }
+            }
+
             Console.WriteLine("Output from Class1.Test2");
             Assert.False(true);
         }
