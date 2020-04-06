@@ -59,6 +59,11 @@ namespace Example.XUnit.Tests
             for (int i = 0; i < 10; i++)
             {
                 Log.Debug($"From Class2.Test2 log #{i}");
+
+                using (var scope = Log.BeginNewScope(p1.ToString()))
+                {
+                    Log.Trace(p2.ToString());
+                }
             }
         }
     }
