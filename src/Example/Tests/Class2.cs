@@ -33,7 +33,7 @@ namespace Example.XUnit.Tests
             var tasks = new List<Task>();
             for (int i = 0; i < 10; i++)
             {
-                tasks.Add(Task.Run(() => { _output.WithReportPortal(); Log.Info("Parallel From Class2.Test1 log"); }));
+                tasks.Add(Task.Run(() => { Log.Info("Parallel From Class2.Test1 log"); }));
             }
 
             Task.WaitAll(tasks.ToArray());
@@ -41,7 +41,7 @@ namespace Example.XUnit.Tests
             tasks = new List<Task>();
             for (int i = 0; i < 20; i++)
             {
-                tasks.Add(Task.Run(async () => { _output.WithReportPortal(); await new ExternalClass().InvokeMeAsync(); }));
+                tasks.Add(Task.Run(async () => { await new ExternalClass().InvokeMeAsync(); }));
             }
 
             Task.WaitAll(tasks.ToArray());
