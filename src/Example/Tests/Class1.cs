@@ -25,7 +25,7 @@ namespace Example.XUnit.Tests
         [Trait("Category", "My Category 2")]
         public void Test1()
         {
-            using (var scope = Log.BeginNewScope("qwe"))
+            using (var scope = Log.BeginScope("qwe"))
             {
                 Console.WriteLine("Console Output from Class1.Test1");
                 _out.WriteLine("Realtime Output from Class1.Test1");
@@ -41,11 +41,11 @@ namespace Example.XUnit.Tests
         [Fact]
         public void Test2()
         {
-            using (var scope = Log.BeginNewScope("abc"))
+            using (var scope = Log.BeginScope("abc"))
             {
                 scope.Info("abc - in scope");
 
-                using (var scope2 = Log.BeginNewScope("qwe"))
+                using (var scope2 = Log.BeginScope("qwe"))
                 {
                     scope2.Trace("qwe - in scope2");
                     scope2.Status = ReportPortal.Shared.Logging.LogScopeStatus.Skipped;

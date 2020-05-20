@@ -60,7 +60,7 @@ namespace Example.XUnit.Tests
             {
                 Log.Debug($"From Class2.Test2 log #{i}");
 
-                using (var scope = Log.BeginNewScope(p1.ToString()))
+                using (var scope = Log.BeginScope(p1.ToString()))
                 {
                     Log.Trace(p2.ToString());
                 }
