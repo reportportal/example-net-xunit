@@ -48,7 +48,7 @@ namespace Example.XUnit.Tests
                 using (var scope2 = Log.BeginScope("qwe"))
                 {
                     scope2.Trace("qwe - in scope2");
-                    scope2.Status = ReportPortal.Shared.Logging.LogScopeStatus.Skipped;
+                    scope2.Status = ReportPortal.Shared.Execution.Logging.LogScopeStatus.Skipped;
                 }
             }
 
