@@ -1,6 +1,7 @@
 ﻿using ReportPortal.Shared;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -25,6 +26,8 @@ namespace Example.XUnit.Tests
         [Trait("Category", "My Category 2")]
         public void Test1()
         {
+            Context.Current.Log.Info("this is dog", "image/png", File.ReadAllBytes("dog.png"));
+
             using (var scope = Log.BeginScope("qwe"))
             {
                 Console.WriteLine("Console Output from Class1.Test1");
