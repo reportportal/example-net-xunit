@@ -2,16 +2,16 @@
   "$schema": "https://raw.githubusercontent.com/reportportal/agent-net-xunit/master/src/ReportPortal.XUnitReporter/ReportPortal.config.schema",
   "enabled": true,
   "server": {
-    "url": "https://web.demo.reportportal.io/api/v1/",
+    "url": "https://demo.reportportal.io/api/v1",
     "project": "default_personal",
     "authentication": {
-      "uuid": "320b9a92-d6ff-4824-a941-c155f35e16bc"
+      "uuid": "71ec8481-537c-4a68-9f78-83325be49643"
     }
   },
   "launch": {
     "name": "XUnit Demo Launch",
     "description": "this is description",
-    "debugMode": true,
+    "debugMode": false,
     "attributes": [ "t1", "os:win10" ]
   }
 }
